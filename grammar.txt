@@ -1,0 +1,54 @@
+1)  input -> epsilon | progam
+
+2)  program -> functions
+
+3)  functions -> function | function functions
+
+4)  function -> FUNCTION IDENT SEMICOLON BEGIN_PARAMS declarations END_PARAMS BEGIN_LOCALS declarations END_LOCALS BEGIN_BODY statements END_BODY 
+
+5)  declarations -> epsilon | declaration SEMICOLON declarations
+
+6)  declaration -> identifiers COLON declaration_prime
+
+7)  declaration_prime -> INTEGER | ARRAY L_SQUARE_BRACKET NUMBER R_SQUARE_BRACKET OF INTEGER
+
+8)  identifiers -> identifier | identifier COMMA identifiers
+
+9)  identifier -> IDENT
+
+10) statements -> statement SEMICOLON | statement SEMICOLON statements
+
+11) statement -> var ASSIGN expression | RETURN expression | CONTINUE | IF boolexpr THEN statements else_prime ENDIF 
+			| WHILE boolexpr BEGINLOOP statements ENDLOOP | DO BEGINLOOP statements ENDLOOP WHILE boolexpr
+			| READ vars | WRITE vars
+
+12) else_prime -> epsilon | ELSE statements
+
+13) vars -> var | var COMMA vars
+
+14) comp -> EQ | NEQ | LT | GT | LTE | GTE
+
+15) var -> identifier | identifier L_SQUARE_BRACKET expression R_SQUARE_BRACKET
+
+16) expression -> multiplicative_expr multiplicative_exprs 
+
+17) multiplicative_exprs -> epsilon | SUB multiplicative_expr multiplicative_exprs | ADD multiplicative_expr multiplicative_exprs 
+
+18) multiplicative_expr -> term terms
+
+19) terms -> epsilon | MULT terms terms | DIV term terms | MOD term terms
+
+20) boolexpr -> relation_and_expr r_a_es
+
+21) r_a_es -> epsilon | OR relation_and_expr r_a_es
+
+22) relation_and_expr -> relation_expr r_es
+
+23) r_es -> epsilon | AND relation_expr r_es
+
+24) relation_expr -> expression comp expression | NOT expression comp expression | TRUE | NOT TRUE | FALSE | NOT FALSE 
+				| L_PAREN boolexpr R_PAREN | NOT L_PAREN boolexpr R_PAREN
+
+25) term -> var | NUMBER | L_PAREN expression R_PAREN | SUB var | SUB NUMBER | SUB L_PAREN | identifier L_PAREN expressions R_PAREN
+
+26) expressions: expression | expression expressions COMMA
